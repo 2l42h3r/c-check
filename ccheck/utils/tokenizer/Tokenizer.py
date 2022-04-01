@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional
+from typing import List, Optional
 import re
 
 from ccheck.domain import Rule, Token
@@ -12,18 +12,15 @@ class Tokenizer:
             return
         self.__rules = rules
 
-    def __rule_matches_text_predicate_factory(text: str):
-        predicate: Callable[[Rule], bool] = (
-            lambda rule: re.search(rule.regex, text) is not None
-        )
-        return predicate
+    def __rule_matches_text_predicate_factory(self, text: str, rule: Rule) -> bool:
+        return re.search(rule.regex, text) is not None
 
     def __get_matching_rule(self, text: str) -> Optional[Rule]:
         return next(
             (
                 rule
                 for rule in self.__rules
-                if self.__rule_matches_text_predicate_factory(text)(rule)
+                if self.__rule_matches_text_predicate_factory(text, rule)
             ),
             None,
         )
@@ -42,12 +39,12 @@ class Tokenizer:
 
     def __partial_tokenize(self, text: str) -> List[Token]:
         length = len(str)
-        if length is 0:
+        if length == 0:
             return []
 
         max_index = self.__get_max_text_index(text)
 
-        if max_index is 0 or max_index is length:
+        if max_index == 0 or max_index == length:
             return []
 
         match = text[0:max_index]
