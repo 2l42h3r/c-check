@@ -1,13 +1,13 @@
 from typing import List, Optional
 import re
 
-from ccheck.domain import Rule, Token
-
+from ccheck.domain.Rule import Rule
+from ccheck.domain.Token import Token
 
 class Tokenizer:
-    __rules: List[Rule]
+    __rules: List[Rule] = []
 
-    def __init__(self, rules: Optional[List[Rule]]) -> None:
+    def __init__(self, rules: Optional[List[Rule]]=None) -> None:
         if rules is None:
             return
         self.__rules = rules
@@ -38,7 +38,7 @@ class Tokenizer:
         )
 
     def __partial_tokenize(self, text: str) -> List[Token]:
-        length = len(str)
+        length = len(text)
         if length == 0:
             return []
 
@@ -61,7 +61,7 @@ class Tokenizer:
 
     def tokenize(self, text: str) -> List[Token]:
         tokens = text.split()
-        return map(self.__partial_tokenize, tokens)
+        return list(map(self.__partial_tokenize, tokens))
 
     def add_rule(self, rule: Rule) -> None:
         self.__rules.append(rule)

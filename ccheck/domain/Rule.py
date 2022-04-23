@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from TokenType import TokenType
+from ccheck.domain.token_type import TokenType
 
 
 @dataclass
