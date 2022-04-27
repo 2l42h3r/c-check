@@ -1,18 +1,22 @@
 from typing import List, Optional
 import re
+from functools import reduce
 
 from ccheck.domain.Rule import Rule
 from ccheck.domain.Token import Token
+from ccheck.config import Config
 
 class Tokenizer:
     __rules: List[Rule] = []
 
     def __init__(self, rules: Optional[List[Rule]]=None) -> None:
         if rules is None:
+            self.__rules = Config.rule_config
             return
         self.__rules = rules
 
-    def __rule_matches_text_predicate_factory(self, text: str, rule: Rule) -> bool:
+    @staticmethod
+    def __rule_matches_text_predicate_factory(text: str, rule: Rule) -> bool:
         return re.search(rule.regex, text) is not None
 
     def __get_matching_rule(self, text: str) -> Optional[Rule]:
@@ -61,7 +65,7 @@ class Tokenizer:
 
     def tokenize(self, text: str) -> List[Token]:
         tokens = text.split()
-        return list(map(self.__partial_tokenize, tokens))
+        return reduce(lambda a,b:a+b, list(map(self.__partial_tokenize, tokens)))
 
     def add_rule(self, rule: Rule) -> None:
         self.__rules.append(rule)

@@ -1,3 +1,4 @@
+from typing import Pattern
 from dataclasses import dataclass
 
 from ccheck.domain.token_type import TokenType
@@ -5,5 +6,5 @@ from ccheck.domain.token_type import TokenType
 
 @dataclass
 class Rule:
-    regex: str
+    regex: Pattern[str]
     type: TokenType
