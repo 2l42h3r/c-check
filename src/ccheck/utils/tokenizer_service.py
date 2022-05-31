@@ -2,25 +2,23 @@ from typing import List, Optional
 import re
 from functools import reduce
 
-from ccheck.domain.Rule import Rule
-from ccheck.domain.Token import Token
+from ccheck.domain.rule import Rule
+from ccheck.domain.token import Token
 from ccheck.config import Config
 
-class Tokenizer:
+
+class TokenizerService:
     __rules: List[Rule] = []
 
-    def __init__(self, rules: Optional[List[Rule]]=None) -> None:
-        if rules is None:
-            self.__rules = Config.rule_config
-            return
-        self.__rules = rules
+    def __init__(self, config: Config) -> None:
+        self.__rules = config.rule_config
 
     @staticmethod
     def __rule_matches_text_predicate_factory(text: str, rule: Rule) -> bool:
         return re.search(rule.regex, text) is not None
 
     def __get_matching_rule(self, text: str) -> Optional[Rule]:
-        return next(
+        val = next(
             (
                 rule
                 for rule in self.__rules
@@ -28,18 +26,18 @@ class Tokenizer:
             ),
             None,
         )
+        return val
 
     def __get_max_text_index(self, text: str) -> int:
-        indexes = range(len(text))
+        i = 0
 
-        return next(
-            (
-                index
-                for index in indexes
-                if self.__get_matching_rule(text[0 : (index + 1)]) is None
-            ),
-            0,
-        )
+        while i < len(text):
+            match = self.__get_matching_rule(text[0 : (i + 1)])
+            if match is None:
+                return i
+            i += 1
+
+        return i
 
     def __partial_tokenize(self, text: str) -> List[Token]:
         length = len(text)
@@ -48,7 +46,7 @@ class Tokenizer:
 
         max_index = self.__get_max_text_index(text)
 
-        if max_index == 0 or max_index == length:
+        if max_index == 0:
             return []
 
         match = text[0:max_index]
@@ -64,8 +62,8 @@ class Tokenizer:
         return tokens
 
     def tokenize(self, text: str) -> List[Token]:
-        tokens = text.split()
-        return reduce(lambda a,b:a+b, list(map(self.__partial_tokenize, tokens)))
+        tokens = list(filter(lambda t: len(t) > 0, re.split(r"(\s+)", text)))
+        return reduce(lambda a, b: a + b, list(map(self.__partial_tokenize, tokens)))
 
     def add_rule(self, rule: Rule) -> None:
         self.__rules.append(rule)

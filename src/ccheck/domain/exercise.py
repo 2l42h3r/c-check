@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from Token import Token
-from ValidationError import ValidationError
+from ccheck.domain.token import Token
+from ccheck.domain.validation_error import ValidationError
 
 
 class Exercise(ABC):
