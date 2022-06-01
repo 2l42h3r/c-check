@@ -7,7 +7,7 @@ from ccheck.domain.validation_error import ValidationError
 
 class Exercise(ABC):
     @abstractmethod
-    def generate(self) -> str:
+    def get_description(self) -> str:
         pass
 
     @abstractmethod
