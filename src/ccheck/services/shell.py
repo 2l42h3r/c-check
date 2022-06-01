@@ -41,6 +41,6 @@ class ShellService:
 
     def read_solution(self) -> str:
         print(
-            "Wprowadź swoje rozwiązanie. By zakończyć wciśnij Ctrl+D (lub Ctrl+Z na Windows)"
+            "Wprowadź swoje rozwiązanie. By zakończyć wciśnij Ctrl+D (lub Ctrl+Z na Windows). Nie importuj bibliotek, wprowadzaj jedynie wymagany kod."
         )
         return self.__input_service.get_multiline_input()

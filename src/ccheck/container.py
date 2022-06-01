@@ -6,6 +6,7 @@ from ccheck.services.exercise_factory import ExerciseFactoryService
 from ccheck.services.input import InputService
 from ccheck.services.shell import ShellService
 from ccheck.utils.tokenizer_service import TokenizerService
+from ccheck.utils.validation_utils_service import ValidationUtilsService
 
 
 class Container(containers.DeclarativeContainer):
@@ -19,6 +20,8 @@ class Container(containers.DeclarativeContainer):
 
     tokenizer_service = providers.Factory(TokenizerService, config=config)
 
+    validation_service = providers.Factory(ValidationUtilsService)
+
     exercise_factory_service = providers.Factory(ExerciseFactoryService, config=config)
 
     application_service = providers.Singleton(
@@ -26,4 +29,5 @@ class Container(containers.DeclarativeContainer):
         shell_service=shell_service,
         exercise_factory_service=exercise_factory_service,
         tokenizer_service=tokenizer_service,
+        validation_service=validation_service,
     )
