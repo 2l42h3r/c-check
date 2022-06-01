@@ -2,6 +2,7 @@ from dependency_injector import containers, providers
 
 from ccheck.config import Config
 from ccheck.services.application import ApplicationService
+from ccheck.services.exercise_factory import ExerciseFactoryService
 from ccheck.services.shell import ShellService
 from ccheck.utils.tokenizer_service import TokenizerService
 
@@ -11,8 +12,12 @@ class Container(containers.DeclarativeContainer):
 
     shell_service = providers.Singleton(ShellService, config=config)
 
+    exercise_factory_service = providers.Factory(ExerciseFactoryService, config=config)
+
     application_service = providers.Singleton(
-        ApplicationService, shell_service=shell_service
+        ApplicationService,
+        shell_service=shell_service,
+        exercise_factory_service=exercise_factory_service,
     )
 
     tokenizer_service = providers.Factory(TokenizerService, config=config)

@@ -1,7 +1,7 @@
 from typing import List, Callable
 
 from ccheck.config import Config
-from ccheck.domain.exercise_type import ExerciseType
+from ccheck.domain.exercise.exercise_type import ExerciseType
 
 
 class ShellService:

@@ -7,5 +7,9 @@ from ccheck.domain.validation_error import ValidationError
 
 class Exercise(ABC):
     @abstractmethod
+    def generate(self) -> str:
+        pass
+
+    @abstractmethod
     def validate(self, tokens: List[Token]) -> List[ValidationError]:
         pass
