@@ -2,7 +2,7 @@ import os
 from ccheck.config import Config
 from ccheck.domain.token import Token
 from ccheck.domain.token_type import TokenType
-from ccheck.utils.tokenizer_service import TokenizerService
+from ccheck.services.tokenizer import TokenizerService
 
 expected = [
     Token(TokenType.DIRECTIVE, content="#include"),
