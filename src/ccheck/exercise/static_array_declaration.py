@@ -1,6 +1,5 @@
 """StaticArrayDeclarationExercise class module"""
 
-import random
 import secrets
 from typing import List
 
@@ -32,7 +31,7 @@ class StaticArrayDeclarationExercise(Exercise):
 
     def __generate(self) -> None:
         self.__picked_type = secrets.choice(self.__variable_types)
-        self.__picked_length = random.randint(2, 10)
+        self.__picked_length = secrets.randbelow(9) + 2
 
     def __create_validations(self) -> None:
         self._add_validation(

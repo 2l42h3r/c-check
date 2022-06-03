@@ -1,6 +1,6 @@
 """SwitchStatementExercise class module"""
 
-from random import randint
+import secrets
 from typing import List
 
 from ccheck.domain.token.token import Token
@@ -20,7 +20,7 @@ class SwitchStatementExercise(Exercise):
         self.__create_validations()
 
     def __generate(self) -> None:
-        self.__special_case = randint(0, 9)
+        self.__special_case = secrets.randbelow(10)
 
     def __create_break_validation(self) -> Validation:
         return self._simple_validation_builder(

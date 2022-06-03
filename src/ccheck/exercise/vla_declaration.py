@@ -1,6 +1,5 @@
 """VLADeclarationExercise class module"""
 
-import random
 import secrets
 from typing import List
 
@@ -31,7 +30,7 @@ class VLADeclarationExercise(Exercise):
         self.__create_validations()
 
     def __generate(self) -> None:
-        self.__picked_length = random.randint(5, 15)
+        self.__picked_length = secrets.randbelow(11) + 5
         self.__picked_type = secrets.choice(self.__variable_types)
 
     def get_description(self) -> str:
