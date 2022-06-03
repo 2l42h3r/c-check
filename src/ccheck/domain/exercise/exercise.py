@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Callable, Optional
+from typing import List, Callable
 
 from ccheck.domain.token import Token
 from ccheck.domain.validation_error import ValidationError
@@ -15,13 +15,9 @@ class Exercise(ABC):
     _validated: List[Token] = []
     __validations: List[Validation] = []
 
-    _simple_validation_builder: Callable[
-        [List[Token], str], Callable[[List[Token]], Optional[ValidationError]]
-    ]
+    _simple_validation_builder: Callable[[List[Token], str], Validation]
 
-    _alternating_validation_builder: Callable[
-        [List[List[Token]], str], Callable[[List[Token]], Optional[ValidationError]]
-    ]
+    _alternating_validation_builder: Callable[[List[List[Token]], str], Validation]
 
     def __init__(self) -> None:
         self._simple_validation_builder = create_simple_validation_builder(

@@ -22,7 +22,7 @@ class TokenizerService:
             (
                 rule
                 for rule in self.__rules
-                if self.__rule_matches_text_predicate_factory(text, rule)
+                if TokenizerService.__rule_matches_text_predicate_factory(text, rule)
             ),
             None,
         )
