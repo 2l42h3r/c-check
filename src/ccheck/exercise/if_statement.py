@@ -1,13 +1,17 @@
+"""IfStatementExercise class module"""
+
 import secrets
 import string
 from typing import Literal
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
 
 
 class IfStatementExercise(Exercise):
+    """IfStatementExercise class"""
+
     def __init__(self) -> None:
         super().__init__()
         self.__generate()

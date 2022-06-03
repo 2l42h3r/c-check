@@ -1,12 +1,16 @@
+"""VariableDeclarationExercise class module"""
+
 import secrets
 from typing import List
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
 
 
 class VariableDeclarationExercise(Exercise):
+    """VariableDeclarationExercise class"""
+
     __variable_types: List[str] = [
         "char",
         "unsigned char",

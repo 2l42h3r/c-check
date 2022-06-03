@@ -1,13 +1,17 @@
+"""VLADeclarationExercise class module"""
+
 import random
 import secrets
 from typing import List
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
 
 class VLADeclarationExercise(Exercise):
+    """VLADeclarationExercise class"""
+
     __variable_types: List[str] = [
         "char",
         "short",
@@ -34,7 +38,9 @@ class VLADeclarationExercise(Exercise):
         return (
             "Zdefiniuj tablicę dynamiczną o nazwie "
             + self.__array_name
-            + " za pomocą wskaźnika do pierwszego elementu tej tablicy oraz funkcji 'malloc' oraz 'sizeof'. Tablica powinna mieć rozmiar "
+            + " za pomocą wskaźnika do pierwszego elementu tej tablicy "
+            + "oraz funkcji 'malloc' oraz 'sizeof'. "
+            + "Tablica powinna mieć rozmiar "
             + str(self.__picked_length)
             + " i przechowywać dane typu "
             + self.__picked_type

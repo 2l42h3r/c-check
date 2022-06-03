@@ -1,11 +1,15 @@
-import random
-from ccheck.domain.token_type import TokenType
+"""ForLoopExercise class module"""
 
-from ccheck.domain.token import Token
+import random
+from ccheck.domain.token.token_type import TokenType
+
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
 
 
 class ForLoopExercise(Exercise):
+    """ForLoopExercise class"""
+
     def __init__(self) -> None:
         super().__init__()
         self.__generate()
@@ -20,7 +24,9 @@ class ForLoopExercise(Exercise):
         return (
             "Zdefiniuj pętlę for, która wykona się "
             + str(self.__iterations)
-            + " razy. Niech zmienna kontrolna nazywa się 'i', będzie typu 'int' i na początku ma wartość 0."
+            + " razy. "
+            + "Niech zmienna kontrolna nazywa się 'i', "
+            + "będzie typu 'int' i na początku ma wartość 0."
         )
 
     def __create_validations(self) -> None:

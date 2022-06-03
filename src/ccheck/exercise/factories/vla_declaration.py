@@ -1,7 +1,12 @@
+"""VLADeclarationExercise factory module"""
+
+from ccheck.domain.exercise.exercise import Exercise
 from ccheck.domain.exercise.exercise_creator import ExerciseCreator
 from ccheck.exercise.vla_declaration import VLADeclarationExercise
 
 
 class VLADeclarationExerciseCreator(ExerciseCreator):
-    def factory_method(self) -> VLADeclarationExercise:
+    """VLADeclarationExercise factory"""
+
+    def factory_method(self) -> Exercise:
         return VLADeclarationExercise()

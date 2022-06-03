@@ -1,3 +1,5 @@
+"""ShellService class module"""
+
 from typing import List, Callable
 
 from ccheck.config import Config
@@ -8,12 +10,12 @@ from ccheck.services.input import InputService
 
 
 class ShellService:
-    __exercise_list: List[Config.ExerciseDict]
-    __input_service: InputService
+    """ShellService class"""
 
-    def __init__(self, config: Config, input_service: InputService) -> None:
+    __exercise_list: List[Config.ExerciseDict]
+
+    def __init__(self, config: Config) -> None:
         self.__exercise_list = config.exercise_config
-        self.__input_service = input_service
 
     def __is_input_valid_exercise_number(self, typed: str) -> bool:
         try:
@@ -27,6 +29,7 @@ class ShellService:
     def print_exercise_list(
         self, on_exercise_select: Callable[[ExerciseType], None]
     ) -> None:
+        """Print available exercise list, execute callback on select"""
         print("Dostępne rodzaje zadań:")
         for index, exercise in enumerate(self.__exercise_list, start=1):
             print(index, ") ", exercise["name"])
@@ -39,16 +42,22 @@ class ShellService:
 
     @staticmethod
     def print_exercise_question(exercise: Exercise) -> None:
+        """Print selected exercise question"""
         print(exercise.get_description())
 
-    def read_solution(self) -> str:
+    @staticmethod
+    def read_solution() -> str:
+        """Print solution helper message and return read input"""
         print(
-            "Wprowadź swoje rozwiązanie. By zakończyć wciśnij Enter i Ctrl+D (Ctrl+Z na Windows). Nie importuj bibliotek, wprowadzaj jedynie wymagany kod."
+            "Wprowadź swoje rozwiązanie. "
+            + "By zakończyć wciśnij Enter i Ctrl+D (Enter + Ctrl+Z + Enter na Windows). "
+            + "Nie importuj bibliotek, wprowadzaj jedynie wymagany kod."
         )
-        return self.__input_service.get_multiline_input()
+        return InputService.get_multiline_input()
 
     @staticmethod
     def ask_for_retry() -> bool:
+        """Ask whether to retry until given correct unswer"""
         while True:
             typed = input("Czy chcesz spróbować ponownie? [T/N]: ")
             if typed in ("Y", "y", "T", "t", "N", "n"):
@@ -56,8 +65,10 @@ class ShellService:
 
     @staticmethod
     def print_success_message() -> None:
+        """Prints correct answer message"""
         print("Poprawna odpowiedź!")
 
     @staticmethod
     def print_error_message(error: ValidationError) -> None:
+        """Prints error message given an error"""
         print("Znaleziono błąd: " + error.error_message)

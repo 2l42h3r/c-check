@@ -1,10 +1,14 @@
+"""DoWhileLoopExercise class module"""
+
 import random
-from ccheck.domain.token_type import TokenType
-from ccheck.domain.token import Token
+from ccheck.domain.token.token_type import TokenType
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
 
 
 class DoWhileLoopExercise(Exercise):
+    """DoWhileLoopExercise class"""
+
     def __init__(self) -> None:
         super().__init__()
         self.__generate()
@@ -113,5 +117,9 @@ class DoWhileLoopExercise(Exercise):
         return (
             "Zdefiniuj pętlę do..while, która wykona się "
             + str(self.__iterations)
-            + " razy. Zdefiniuj zmienną kontrolną 'i' typu 'int', która na początku ma wartość 0. Dla każdego wykonania pętli wywołaj daną funkcję 'test', która jako jedyny argument przyjmie obecną wartość zmiennej kontrolnej. Zmianę wartości zmiennej kontrolnej przeprowadź dopiero po wywołaniu funkcji 'test'."
+            + " razy. "
+            + "Zdefiniuj zmienną kontrolną 'i' typu 'int', która na początku ma wartość 0. "
+            + "Dla każdego wykonania pętli wywołaj daną funkcję 'test', "
+            + "która jako jedyny argument przyjmie obecną wartość zmiennej kontrolnej. "
+            + "Zmianę wartości zmiennej kontrolnej przeprowadź dopiero po wywołaniu funkcji 'test'."
         )

@@ -1,3 +1,5 @@
+"""Functions aiding manipulating arrays"""
+
 import itertools
 from typing import List, Optional, TypeVar
 

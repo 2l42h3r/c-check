@@ -1,13 +1,17 @@
+"""StaticArrayDeclarationExercise class module"""
+
 import random
 import secrets
 from typing import List
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
 
 class StaticArrayDeclarationExercise(Exercise):
+    """StaticArrayDeclarationExercise class"""
+
     __variable_types: List[str] = [
         "char",
         "short",

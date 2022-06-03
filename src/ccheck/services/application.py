@@ -1,3 +1,5 @@
+"""ApplicationService class module"""
+
 import sys
 from ccheck.domain.exercise.exercise_type import ExerciseType
 from ccheck.services.exercise_factory import ExerciseFactoryService
@@ -8,6 +10,8 @@ from ccheck.utils.validation import remove_whitespace_tokens
 
 
 class ApplicationService:
+    """ApplicationService class"""
+
     __shell_service: ShellService
     __exercise_factory_service: ExerciseFactoryService
     __tokenizer_service: TokenizerService
@@ -25,6 +29,7 @@ class ApplicationService:
 
     def __on_exercise_select(self, exercise_type: ExerciseType) -> None:
         self.__exercise = self.__exercise_factory_service.create_exercise(exercise_type)
+        ShellService.print_exercise_question(self.__exercise)
 
     def __exercise_runloop(self) -> None:
         while True:
@@ -41,6 +46,7 @@ class ApplicationService:
                 break
 
     def run(self) -> None:
+        """Read selected exercise and run answer-checking loop"""
         try:
             self.__shell_service.print_exercise_list(self.__on_exercise_select)
         except ValueError:

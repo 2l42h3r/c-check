@@ -2,8 +2,8 @@
 
 from typing import List, Callable, Optional
 
-from ccheck.domain.token import Token
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token import Token
+from ccheck.domain.token.token_type import TokenType
 from ccheck.domain.validation_error import ValidationError
 from ccheck.utils.arrays import check_for_ordered_subarray, flatten
 
@@ -19,6 +19,8 @@ def create_simple_validation_builder(
     validated_getter: Callable[[], List[Token]],
     validated_setter: Callable[[List[Token]], None],
 ) -> Callable[[List[Token], str], Validation]:
+    """Bind exercise class validated getter and setter to simple validation builder"""
+
     def builder(
         tokens_to_find: List[Token], validation_error_message: str
     ) -> Validation:
@@ -33,6 +35,8 @@ def create_alternating_validation_builder(
     validated_getter: Callable[[], List[Token]],
     validated_setter: Callable[[List[Token]], None],
 ) -> Callable[[List[List[Token]], str], Validation]:
+    """Bind exercise class validated getter and setter to alternating validation builder"""
+
     def builder(
         tokens_variants: List[List[Token]], validation_error_message: str
     ) -> Validation:
@@ -52,6 +56,8 @@ def build_alternating_validation(
     validated_getter: Callable[[], List[Token]],
     validated_setter: Callable[[List[Token]], None],
 ) -> Validation:
+    """Return new validation checking for tokens occouring in correct order"""
+
     def validation(all_tokens: List[Token]) -> Optional[ValidationError]:
         for token_possibility in tokens_variants:
             if check_for_ordered_subarray(
@@ -70,6 +76,12 @@ def build_simple_validation(
     validated_getter: Callable[[], List[Token]],
     validated_setter: Callable[[List[Token]], None],
 ) -> Validation:
+    """
+    Return new validation checking for multiple,
+    mutually exclusive instances of tokens
+    occouring in correct order
+    """
+
     def validation(all_tokens: List[Token]) -> Optional[ValidationError]:
         if check_for_ordered_subarray(
             all_tokens, flatten([validated_getter(), tokens_to_find])

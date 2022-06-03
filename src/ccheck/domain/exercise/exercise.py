@@ -1,7 +1,9 @@
+"""Base Exercise class module"""
+
 from abc import ABC, abstractmethod
 from typing import List, Callable
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.validation_error import ValidationError
 from ccheck.utils.arrays import filter_out_none
 from ccheck.utils.validation import (
@@ -12,6 +14,8 @@ from ccheck.utils.validation import (
 
 
 class Exercise(ABC):
+    """Base Exercise class"""
+
     _validated: List[Token] = []
     __validations: List[Validation] = []
 
@@ -38,8 +42,9 @@ class Exercise(ABC):
 
     @abstractmethod
     def get_description(self) -> str:
-        pass
+        """Return exercise description and guidelines"""
 
     def validate(self, tokens: List[Token]) -> List[ValidationError]:
+        """Return array of errors from validating exercise input"""
         self._validated = []
         return filter_out_none(list(map(lambda v: v(tokens), self.__validations)))

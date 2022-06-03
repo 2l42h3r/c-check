@@ -1,11 +1,15 @@
+"""Token dataclass module"""
+
 from dataclasses import dataclass
 from typing import Any
 
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
 
-@dataclass
+@dataclass(slots=True)
 class Token:
+    """Token dataclass"""
+
     type: TokenType
     content: str
 

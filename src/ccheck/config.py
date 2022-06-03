@@ -1,8 +1,10 @@
+"""Injectable config class module"""
+
 from typing import List, TypedDict
 import re
 
 from ccheck.domain.rule import Rule
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 from ccheck.domain.exercise.exercise_type import ExerciseType
 from ccheck.domain.exercise.exercise_creator import ExerciseCreator
 from ccheck.exercise.factories.switch_statement import SwitchStatementExerciseCreator
@@ -22,11 +24,17 @@ from ccheck.exercise.factories.vla_declaration import VLADeclarationExerciseCrea
 
 
 class Config:
+    """Injectable config class"""
+
     class ExerciseDict(TypedDict):
+        """Strictly typed ExerciseType->exercise name map"""
+
         exercise: ExerciseType
         name: str
 
     class ExerciseFactoryDict(TypedDict):
+        """Strictly typed ExerciseType->exercise factory map"""
+
         exercise: ExerciseType
         factory: ExerciseCreator
 

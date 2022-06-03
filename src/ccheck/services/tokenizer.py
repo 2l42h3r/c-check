@@ -1,13 +1,17 @@
+"""TokenizerService class module"""
+
 from typing import List, Optional
 import re
 from functools import reduce
 
 from ccheck.domain.rule import Rule
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.config import Config
 
 
 class TokenizerService:
+    """TokenizerService class"""
+
     __rules: List[Rule] = []
 
     def __init__(self, config: Config) -> None:
@@ -62,8 +66,10 @@ class TokenizerService:
         return tokens
 
     def tokenize(self, text: str) -> List[Token]:
+        """Returns list of tokens found in given text"""
         tokens = list(filter(lambda t: len(t) > 0, re.split(r"(\s+)", text)))
         return reduce(lambda a, b: a + b, list(map(self.__partial_tokenize, tokens)))
 
     def add_rule(self, rule: Rule) -> None:
+        """Adds a new token to instance's rule list"""
         self.__rules.append(rule)

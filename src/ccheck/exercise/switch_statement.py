@@ -1,13 +1,17 @@
+"""SwitchStatementExercise class module"""
+
 from random import randint
 from typing import List
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 from ccheck.utils.validation import Validation
 
 
 class SwitchStatementExercise(Exercise):
+    """SwitchStatementExercise class"""
+
     __special_case: int
 
     def __init__(self) -> None:
@@ -96,7 +100,10 @@ class SwitchStatementExercise(Exercise):
 
     def get_description(self) -> str:
         return (
-            "Zapisz konstrukcję warunkową switch-case, która jako wyrażenie przyjmie zmienną 'var' (jej typ - 'int'). W przypadku wystąpienia liczby "
+            "Zapisz konstrukcję warunkową switch-case, "
+            + "która jako wyrażenie przyjmie zmienną 'var' (jej typ - 'int'). "
+            + "W przypadku wystąpienia liczby "
             + str(self.__special_case)
-            + ", wypisz tekst 'znaleziono!' używając instrukcji 'puts'. W dowolnym innym wypadku wypisz 'brak'."
+            + ", wypisz tekst 'znaleziono!' używając instrukcji 'puts'. "
+            + "W dowolnym innym wypadku wypisz 'brak'."
         )

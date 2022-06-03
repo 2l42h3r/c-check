@@ -1,14 +1,18 @@
+"""FunctionDefinitionExercise class module"""
+
 import secrets
 from typing import Dict, List, Literal
 
-from ccheck.domain.token import Token
+from ccheck.domain.token.token import Token
 from ccheck.domain.exercise.exercise import Exercise
-from ccheck.domain.token_type import TokenType
+from ccheck.domain.token.token_type import TokenType
 
 OperationType = Literal["addition", "subtraction", "multiplication", "division"]
 
 
 class FunctionDefinitionExercise(Exercise):
+    """FunctionDefinitionExercise class"""
+
     __operation_types: List[OperationType] = [
         "addition",
         "subtraction",
@@ -41,7 +45,12 @@ class FunctionDefinitionExercise(Exercise):
         self.__picked_operation_type = secrets.choice(self.__operation_types)
 
     def get_description(self) -> str:
-        return "Zapisz funkcję typu int o nazwie " + self.__function_name_switch.get(self.__picked_operation_type) + ", która przyjmie argumenty a i b typu int, po czym zwróci wynik żądanej operacji. Nie używaj zmiennych pomocniczych."  # type: ignore
+        return (
+            "Zapisz funkcję typu int o nazwie "
+            + self.__function_name_switch.get(self.__picked_operation_type)  # type: ignore
+            + ", która przyjmie argumenty a i b typu int, "
+            + "po czym zwróci wynik żądanej operacji. Nie używaj zmiennych pomocniczych."
+        )
 
     def __create_validations(self) -> None:
         self._add_validation(
@@ -52,7 +61,13 @@ class FunctionDefinitionExercise(Exercise):
         )
         self._add_validation(
             self._simple_validation_builder(
-                [Token(TokenType.IDENTIFIER, self.__function_name_switch.get(self.__picked_operation_type))], "Nieprawidłowa nazwa funkcji!"  # type: ignore
+                [
+                    Token(
+                        TokenType.IDENTIFIER,
+                        self.__function_name_switch.get(self.__picked_operation_type),  # type: ignore
+                    )
+                ],
+                "Nieprawidłowa nazwa funkcji!",
             )
         )
         self._add_validation(

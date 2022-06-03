@@ -1,7 +1,11 @@
+"""Exercise types enum module"""
+
 from enum import Enum
 
 
 class ExerciseType(Enum):
+    """Exercise types enum"""
+
     VARIABLE_DECLARATION = 1
     IF_STATEMENT = 2
     SWITCH_STATEMENT = 3

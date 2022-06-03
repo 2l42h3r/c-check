@@ -1,7 +1,11 @@
+"""Token enum module"""
+
 from enum import Enum, auto
 
 
 class TokenType(Enum):
+    """Token type enum"""
+
     WHITESPACE = auto()
     WORD = auto()
     NUMBER = auto()

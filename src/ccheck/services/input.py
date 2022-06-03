@@ -1,8 +1,14 @@
+"""InputService class module"""
+
 from typing import List
 
 
 class InputService:
-    def get_multiline_input(self) -> str:
+    """InputService class"""
+
+    @staticmethod
+    def get_multiline_input() -> str:
+        """Returns read multi-line stdin input"""
         content: List[str] = []
         while True:
             try:
