@@ -41,4 +41,5 @@ class Exercise(ABC):
         pass
 
     def validate(self, tokens: List[Token]) -> List[ValidationError]:
+        self._validated = []
         return filter_out_none(list(map(lambda v: v(tokens), self.__validations)))

@@ -1,3 +1,4 @@
+import sys
 from ccheck.domain.exercise.exercise_type import ExerciseType
 from ccheck.services.exercise_factory import ExerciseFactoryService
 from ccheck.domain.exercise.exercise import Exercise
@@ -25,14 +26,25 @@ class ApplicationService:
     def __on_exercise_select(self, exercise_type: ExerciseType) -> None:
         self.__exercise = self.__exercise_factory_service.create_exercise(exercise_type)
 
-    def run(self) -> None:
-        self.__shell_service.print_exercise_list(self.__on_exercise_select)
-        self.__shell_service.print_exercise_question(self.__exercise)
+    def __exercise_runloop(self) -> None:
+        while True:
+            solution = self.__shell_service.read_solution()
+            tokens_no_whitespace = remove_whitespace_tokens(
+                self.__tokenizer_service.tokenize(solution)
+            )
+            errors = self.__exercise.validate(tokens_no_whitespace)
+            if len(errors) == 0:
+                self.__shell_service.print_success_message()
+                break
+            ShellService.print_error_message(errors[0])
+            if not ShellService.ask_for_retry():
+                break
 
-        solution = self.__shell_service.read_solution()
-        tokens_no_whitespace = remove_whitespace_tokens(
-            self.__tokenizer_service.tokenize(solution)
-        )
-        print("tokens with no whitespaces", tokens_no_whitespace)
-        errors = self.__exercise.validate(tokens_no_whitespace)
-        print(errors)
+    def run(self) -> None:
+        try:
+            self.__shell_service.print_exercise_list(self.__on_exercise_select)
+        except ValueError:
+            print("Niepoprawny numer zadania!")
+            sys.exit(1)
+
+        self.__exercise_runloop()
