@@ -8,6 +8,9 @@ Tool for generating and checking simple C language exercises.
 * at least Python 3.7
 * Pip installed
 
+## Install from pip
+```python -m pip install ccheck-2l42h3r```
+
 ## Running from source without building
 
 Install dependencies:
