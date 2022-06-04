@@ -27,7 +27,7 @@ Run project as module:
 
 Install dependencies:
 
-```python -m pip -r requirements.txt```
+```python -m pip install -r requirements.txt```
 
 Install/update build tools:
 
