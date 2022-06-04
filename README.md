@@ -15,7 +15,7 @@ Tool for generating and checking simple C language exercises.
 
 Install dependencies:
 
-```python -m pip -r requirements.txt```
+```python -m pip install -r requirements.txt```
 
 Add project to PYTHONPATH (this depends on OS)
 
