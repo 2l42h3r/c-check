@@ -7,6 +7,7 @@ from ccheck.domain.rule import Rule
 from ccheck.domain.token.token_type import TokenType
 from ccheck.domain.exercise.exercise_type import ExerciseType
 from ccheck.domain.exercise.exercise_creator import ExerciseCreator
+from ccheck.exercise.factories.printing_function import PrintingFunctionExerciseCreator
 from ccheck.exercise.factories.switch_statement import SwitchStatementExerciseCreator
 from ccheck.exercise.factories.variable_declaration import (
     VariableDeclarationExerciseCreator,
@@ -91,6 +92,7 @@ class Config:
             "exercise": ExerciseType.VLA_POINTER_DECLARATION,
         },
         {"name": "Definicja funkcji", "exercise": ExerciseType.FUNCTION_DEFINITION},
+        {"name": "Funkcja drukująca", "exercise": ExerciseType.PRINTING_FUNCTION},
     ]
 
     exercise_factories: List[ExerciseFactoryDict] = [
@@ -125,5 +127,9 @@ class Config:
         {
             "exercise": ExerciseType.FUNCTION_DEFINITION,
             "factory": FunctionDefinitionExerciseCreator(),
+        },
+        {
+            "exercise": ExerciseType.PRINTING_FUNCTION,
+            "factory": PrintingFunctionExerciseCreator(),
         },
     ]
